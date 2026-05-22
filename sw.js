@@ -1,5 +1,5 @@
 const CACHE = 'md16-v1';
-const URLS = ['hiit-modiamond16.html', 'manifest.json', 'icon.svg'];
+const URLS = ['/', 'manifest.json', 'icon.svg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(URLS)).then(() => self.skipWaiting()));

@@ -2,7 +2,7 @@
   "name": "MODIAMOND16",
   "short_name": "MODIAMOND16",
   "description": "HIIT workout visualizer with animated SVG figure — 31 exercises, 6 programs, session mode",
-  "start_url": "hiit-modiamond16.html",
+  "start_url": "/",
   "scope": ".",
   "display": "standalone",
   "orientation": "portrait",
