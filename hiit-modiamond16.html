@@ -681,7 +681,7 @@ window.addEventListener('resize',updPad);
 // Theme toggle
 const thChk=$('thChk');
 if(localStorage.getItem('md16_light')==='true'){document.documentElement.setAttribute('data-theme','light');thChk.checked=true;$('hstBtn').textContent='☀️';$('thLb').textContent='☀️ Light Mode'}
-thChk.addEventListener('change',()=>{document.documentElement.toggleAttribute('data-theme','light',thChk.checked);localStorage.setItem('md16_light',thChk.checked);$('hstBtn').textContent=thChk.checked?'☀️':'📊';$('thLb').textContent=thChk.checked?'☀️ Light Mode':'☀️ Dark Mode'});
+thChk.addEventListener('change',()=>{if(thChk.checked)document.documentElement.setAttribute('data-theme','light');else document.documentElement.removeAttribute('data-theme');localStorage.setItem('md16_light',thChk.checked);$('hstBtn').textContent=thChk.checked?'☀️':'📊';$('thLb').textContent=thChk.checked?'☀️ Light Mode':'☀️ Dark Mode'});
 // List view toggle
 $('lvBtn').addEventListener('click',function(){gr.classList.toggle('l');this.classList.toggle('on');this.textContent=gr.classList.contains('l')?'☰ Grid':'☰ List'});
 // Haptic on buttons
