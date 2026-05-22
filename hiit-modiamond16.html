@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
 <title>MODIAMOND16 — HIIT Programs</title>
 <style>
@@ -142,7 +143,7 @@ body{background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;t
 .cn i{position:absolute;width:6px;height:6px;border-radius:2px;animation:cf linear forwards}
 @keyframes cf{0%{transform:translateY(-10px)rotate(0deg)scale(1);opacity:1}100%{transform:translateY(100vh)rotate(720deg)scale(.3);opacity:0}}
 /* ── REDUCED MOTION ── */
-@media(prefers-reduced-motion){.au,.cpl .e,.cd:hover{animation:none!important;transition:none!important}.cd:hover{transform:none!important}}
+@media(prefers-reduced-motion:reduce){.au,.cpl .e,.cd:hover{animation:none!important;transition:none!important}.cd:hover{transform:none!important}}
 /* ── RESPONSIVE ── */
 @media(max-width:480px){
 .pc{padding:6px 8px;gap:5px}.pc-it{min-width:80px;padding:5px 10px}.pc-it .pci{font-size:14px}.pc-it .pcn{font-size:10px}
@@ -345,7 +346,7 @@ const CF={lower:'Lower',upper:'Upper',core:'Core',full:'Full Body',plyo:'Plyo'};
 
 // ─── PROGRAMS ────────────────────────────────────────────────
 const PROGS=[
-{id:'md16',name:'MODIAMOND16',ico:'💎',desc:'Original — 16 bodyweight, full body, 30s each',diff:'All',min:9,work:30,rest:5,ex:['jumpingJack','squat','pushup','revLunge','mtnClimber','burpee','aSkipClap','sideCrunch','highKnee','gluteBridge','buttKick','plankTaps','tuckJump','speedSkater','bearCrawl','broadJump']},
+{id:'md16',name:'MODIAMOND16',ico:'💎',desc:'Original — 16 bodyweight, full body, 30s each',diff:'All',min:9,work:30,rest:10,ex:['jumpingJack','squat','pushup','revLunge','mtnClimber','burpee','aSkipClap','sideCrunch','highKnee','gluteBridge','buttKick','plankTaps','tuckJump','speedSkater','bearCrawl','broadJump']},
 {id:'quick',name:'Quick Burn',ico:'🔥',desc:'8 exercises, 40s each. Short & intense.',diff:'Int',min:8,work:40,rest:20,ex:['jumpingJack','squat','pushup','mtnClimber','burpee','highKnee','tuckJump','speedSkater']},
 {id:'tabata',name:'Tabata Blast',ico:'⚡',desc:'8 exercises x 4 rounds. 20s on, 10s off.',diff:'Adv',min:16,work:20,rest:10,ex:['burpee','tuckJump','mtnClimber','speedSkater','plankTaps','aSkipClap','broadJump','sideCrunch']},
 {id:'core',name:'Core Crusher',ico:'🎯',desc:'12 core & ab exercises. 30s each.',diff:'All',min:8,work:30,rest:10,ex:['sideCrunch','mtnClimber','plankTaps','revCrunch','toeTaps','superman','plankJack','russianTwist','bicycleCrunch','legRaise','gluteBridge','bearCrawl']},
@@ -495,7 +496,7 @@ function renderProgs(){
 
 function selectProg(id){
   if(id===S.curProg)return;
-  S.curProg=id;stopF();pauseInt();S.play=false;playB.textContent='▶ Play';S.sesh=false;seshB.textContent='▶ Session';seshB.classList.remove('on');sbw.style.display='none';
+  S.curProg=id;cT&&(clearTimeout(cT),cT=null);stopF();pauseInt();S.play=false;playB.textContent='▶ Play';S.sesh=false;seshB.textContent='▶ Session';seshB.classList.remove('on');sbw.style.display='none';
   const p=getProg(id);renderProgs();renderGrid('all',id);
   // Select first exercise
   const exs=progExs(id);
@@ -535,6 +536,8 @@ function pick(id,fromSesh,progId){
   ft.classList.toggle('on',window.innerWidth>500);
   if(!fromSesh){S.sesh=false;S.play=false;stopF();stopR();playB.textContent='▶ Play';seshB.textContent='▶ Session';seshB.classList.remove('on');sbw.style.display='none';}
   renderGrid(S.fil,pid);
+  const q=$('sri').value.trim().toLowerCase();
+  if(q){gr.querySelectorAll('.cd').forEach(el=>{el.style.display=el.querySelector('.nm').textContent.toLowerCase().includes(q)?'':'none'})}
   const pExs=progExs(pid);
   const cIdx=pExs.indexOf(id);const nIdx=(cIdx+1)%pExs.length;
   const nxEx=EX.find(x=>x.id===pExs[nIdx]);
@@ -627,11 +630,13 @@ function nxSesh(){
   pick(S.sList[S.sIdx],true);startInt();beep(660,100);
 }
 
+let cT=null;
 function cnfBurst(){
+  if(cT){clearTimeout(cT)}
   const c=document.createElement('div');c.className='cn';document.body.appendChild(c);
   const cs=['#00d4ff','#ff6b9d','#00ff88','#aa66ff','#ff8844','#fff'];
   for(let i=0;i<60;i++){const el=document.createElement('i');el.style.left=Math.random()*100+'%';el.style.background=cs[i%cs.length];el.style.width=(3+Math.random()*5)+'px';el.style.height=(3+Math.random()*5)+'px';el.style.borderRadius=Math.random()>.5?'50%':'2px';el.style.animationDuration=(1.5+Math.random()*2)+'s';el.style.animationDelay=Math.random()*1+'s';c.appendChild(el)}
-  setTimeout(()=>c.remove(),3500);
+  cT=setTimeout(()=>{c.remove();cT=null},3500);
 }
 
 // ─── MOBILE DRAG ────────────────────────────────────────────
