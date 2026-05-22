@@ -1,0 +1,19 @@
+{
+  "name": "MODIAMOND16",
+  "short_name": "MODIAMOND16",
+  "description": "HIIT workout visualizer with animated SVG figure — 31 exercises, 6 programs, session mode",
+  "start_url": "hiit-modiamond16.html",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#07070f",
+  "theme_color": "#07070f",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

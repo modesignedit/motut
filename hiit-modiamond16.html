@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#07070f">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon.svg">
 <title>MODIAMOND16 — HIIT Programs</title>
 <style>
 :root{--bg:#07070f;--text:#e8e8f0;--dim:#5a5a8a;--cyan:#00d4ff;--pink:#ff6b9d;--green:#00ff88;--purple:#aa66ff;--orange:#ff8844;--cc:var(--cyan);--cc2:var(--pink)}
@@ -688,6 +691,7 @@ if(defExs.length)pick(defExs[0],false,defProg.id);
 rstF();main(0);
 // Init grid padding
 updPad();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
 </script>
 </body>
 </html>
